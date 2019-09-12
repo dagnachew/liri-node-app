@@ -16,7 +16,7 @@ const term = process.argv[3]
 function moviethis(term) {
 
   if(!term){
-    term = "Mr Nobody";
+    term = "Mr. Nobody";
   } 
     const URL = "https://www.omdbapi.com/?t=" + term + "&y=&plot=short&apikey=c678e609";
     axios.get(URL).then(
@@ -56,7 +56,61 @@ function moviethis(term) {
 
 moviethis(term);
 
-//=========================================================================================================================================================
+//===============================================================spotify-this-song==========================================================================================
+
+function spotifythissong(term) {
+  if(!term){
+    term = "The Sign";
+  } 
+spotify
+  .search({ type: 'track', query: term })
+  .then(function(response) {
+    // console.log(response);
+    for(let i = 0; i < response.tracks.items.length; i++) {
+      console.log(`
+        Artist: ${response.tracks.items[i].artists[0].name}
+        Song's Name: ${response.tracks.items[i].name}
+        Album: ${response.tracks.items[i].album.name}
+        Preview: ${response.tracks.items[i].preview_url}
+      `)
+    }
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
+
+}
+spotifythissong(term);
+
+
+// Usage with Promises
+// This package also optionally works with promises. Just omit the callback parameter and the search method returns a promise object containing the response:
+
+// var Spotify = require('node-spotify-api');
+ 
+// var spotify = new Spotify({
+//   id: <your spotify client id>,
+//   secret: <your spotify client secret>
+// });
+ 
+// spotify
+//   .search({ type: 'track', query: 'All the Small Things' })
+//   .then(function(response) {
+//     console.log(response);
+//   })
+//   .catch(function(err) {
+//     console.log(err);
+//   });
+
+
+
+
+
+
+
+
+
+
 
 
 // if(task === 'movie-this'){
